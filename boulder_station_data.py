@@ -46,11 +46,13 @@ Compute frequency table.
 Part 4
 Plot wind rose.
 """
+# create a DataFrame with just Wind Speed and Direction
 wind_data = pd.DataFrame({
     'speed': df["Hi_Speed"],
     'direction': df["Hi_Dir"]
 })
 
+# convert wind direction to degrees and add to the DataFrame
 direction_mapping = {
     'N': 0,
     'NNE': 22.5,
