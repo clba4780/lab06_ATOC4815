@@ -75,12 +75,6 @@ direction_mapping = {
 wind_data['direction_degrees'] = wind_data["direction"].map(direction_mapping)
 
 
-""" find then frequency/tendency of each wind direction
-    You can count the number of each value from a DataFrame using a .value_counts()
-    df.value_counts()
-"""
-direction_count = (wind_data['direction_degrees'].value_counts())
-
 """
 You have the number of times the wind blows in each direction.
 Now you need to sort the wind from each direction into speed categories:
@@ -98,7 +92,21 @@ speed_label = ['0-5', '6-10', '11-15', '16-20', '21-25', '26-30']
 
 wind_data['speed_groups'] = pd.cut(wind_data['speed'], bins=speed_bins, labels=speed_label)
 
-print (wind_data)
+"""
+For the wind rose plot:
+    a) direction_mapping - 16 cardinal direction spokes
+    b) speed_groups - wind speed categories
+    c) create a frequency table that plots the frequency of the wind for each speed bin
+
+create a table with the direction frequency and the speed bins
+"""
+# sort wind_data by wind direction
+wind_data.sort_values(by='direction', ascending=True)
+
+wind_freq = pd.crosstab(wind_data['direction_degrees'], wind_data['speed_groups'])
+
+print (wind_freq)
+
 
 
 
