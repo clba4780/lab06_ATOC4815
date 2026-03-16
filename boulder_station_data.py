@@ -77,12 +77,28 @@ wind_data['direction_degrees'] = wind_data["direction"].map(direction_mapping)
 
 """ find then frequency/tendency of each wind direction
     You can count the number of each value from a DataFrame using a .value_counts()
-    df.value_counts(parameter)
+    df.value_counts()
 """
 direction_count = (wind_data['direction_degrees'].value_counts())
 
-print(direction_count)
+"""
+You have the number of times the wind blows in each direction.
+Now you need to sort the wind from each direction into speed categories:
+    0-5 mph
+    6-10 mph
+    11-15 mph
+    16-20 mph
+    20-25 mph
+    25-30 mph
 
+Uses the bins function in Pandas to sort the wind speed and frequency by direction
+"""
+speed_bins = [0,5,10,15,20,25,30]
+speed_label = ['0-5', '6-10', '11-15', '16-20', '21-25', '26-30']
+
+wind_data['speed_groups'] = pd.cut(wind_data['speed'], bins=speed_bins, labels=speed_label)
+
+print (wind_data)
 
 
 
