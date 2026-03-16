@@ -74,7 +74,15 @@ direction_mapping = {
 
 wind_data['direction_degrees'] = wind_data["direction"].map(direction_mapping)
 
-print (wind_data)
+
+""" find then frequency/tendency of each wind direction
+    You can count the number of each value from a DataFrame using a .value_counts()
+    df.value_counts(parameter)
+"""
+direction_count = (wind_data['direction_degrees'].value_counts())
+
+print(direction_count)
+
 
 
 
