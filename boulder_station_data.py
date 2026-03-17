@@ -1,6 +1,8 @@
 import pandas as pd 
 import matplotlib.pyplot as plt
 
+from windrose import WindroseAxes
+
 
 url = "https://sundowner.colorado.edu/weather/atoc1/wxobs20260215.txt"
 
@@ -106,6 +108,27 @@ wind_data.sort_values(by='direction', ascending=True)
 wind_freq = pd.crosstab(wind_data['direction_degrees'], wind_data['speed_groups'])
 
 print (wind_freq)
+
+"""
+Use the Matplotlib windrose plot to graph the data. 
+"""
+direction = wind_data['direction_degrees']
+speed = wind_data['speed']
+
+
+ax = WindroseAxes.from_ax()
+ax.bar(direction, speed, 
+       bins = [0,5,10,15,20,25,30],
+       normed = True, opening = 1, 
+       edgecolor="black")
+ax.set_legend(title="Wind Speed (mph)", loc = 'best')
+ax.set_title("Feb. 15th, 2026 Windrose Diagram", fontsize = 16)
+
+plt.savefig('windrose.png', dpi = 150, bbox_inches = 'tight')
+plt.show()
+
+print ("Figured saved to lab06_ATOC4815")
+
 
 
 
